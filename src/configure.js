@@ -1,0 +1,20 @@
+export const categories = [
+  { id: 0, name_en: "Demolition", name_es: "Demolición" },
+  { id: 1, name_en: "Masonry & Walls", name_es: "Albañilería & Tabiquería" },
+  { id: 2, name_en: "Insulation", name_es: "Aislamiento" },
+  { id: 3, name_en: "Waterproofing", name_es: "Impermeabilización" },
+  { id: 4, name_en: "Plumbing", name_es: "Fontanería" },
+  { id: 5, name_en: "Heating & Cooling", name_es: "Climatización" },
+  {
+    id: 6,
+    name_en: "Electricity & Lighting",
+    name_es: "Electricidad & Iluminación",
+  },
+  { id: 7, name_en: "Ceiling", name_es: "Techo" },
+  { id: 8, name_en: "Wall and floor tiling", name_es: "Solados y Alicatados" },
+  { id: 9, name_en: "Windows", name_es: "Ventanas" },
+  { id: 10, name_en: "	Wood carpentry", name_es: "Carpintería de madera" },
+  { id: 11, name_en: "Painting", name_es: "Pintura" },
+  { id: 12, name_en: "Kitchen room", name_es: "Cocina" },
+  { id: 13, name_en: "Others", name_es: "Varios" },
+];

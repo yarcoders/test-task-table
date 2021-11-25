@@ -1,0 +1,15 @@
+export const colors = {
+  categoryTitleBackground: "#e3edff",
+  categoryBackground: "#e3edff",
+  cellBackground: "#fdfdfd",
+  iconColor: "#0073C8",
+  iconColorHovered: "#00518C",
+  cellBorder: "#a4a4a4",
+  descriptionBackground: "#f4f4f4",
+  descriptionBorder: "#dedede",
+  headerTitles: "#252525",
+  totalSumRawBackground: "#005DA2",
+  totalSumRawBorder: "#000",
+  totalSumRawText: "#fff",
+  groupSumBackground: "#f2f2f2",
+};
