@@ -6,12 +6,8 @@ import {
   reduceJobs,
   calcTotalSum,
   moneyFormat,
-  sortAscDecision,
-  sortDescDecision,
-  sortAscCategory,
-  sortDescCategory,
-  sortAscSum,
-  sortDescSum,
+  sortSum,
+  sortStr,
 } from "../../utils/generic";
 
 import Row from "../Row";
@@ -36,11 +32,13 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
     if (!e.target) return;
     if (uniqJobsByName.length === 1) return;
 
-    const columnName = e.target?.innerText?.toLowerCase();
+    const columnName = e.target.innerText
+      ? e.target.innerText.toLowerCase()
+      : e.target.closest("a").innerText.toLowerCase();
 
     if (columnName === "decision" && decisionSortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortAscDecision)];
+        return [...prev.sort((a, b) => sortStr(a.dec_id, b.dec_id, true))];
       });
 
       setDecisionSortAsc((prev) => !prev);
@@ -48,7 +46,7 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
 
     if (columnName === "decision" && !decisionSortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortDescDecision)];
+        return [...prev.sort((a, b) => sortStr(a.dec_id, b.dec_id, false))];
       });
 
       setDecisionSortAsc((prev) => !prev);
@@ -56,7 +54,9 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
 
     if (columnName === "category" && categorySortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortAscCategory)];
+        return [
+          ...prev.sort((a, b) => sortStr(a.categoryName, b.categoryName, true)),
+        ];
       });
 
       setCategorySortAsc((prev) => !prev);
@@ -64,7 +64,11 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
 
     if (columnName === "category" && !categorySortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortDescCategory)];
+        return [
+          ...prev.sort((a, b) =>
+            sortStr(a.categoryName, b.categoryName, false)
+          ),
+        ];
       });
 
       setCategorySortAsc((prev) => !prev);
@@ -72,7 +76,7 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
 
     if (columnName === "sum" && sumSortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortAscSum)];
+        return [...prev.sort((a, b) => sortSum(a, b, true))];
       });
 
       setSumSortAsc((prev) => !prev);
@@ -80,7 +84,7 @@ export default function CombinedJobs({ sameJobsArr, groupNumber }) {
 
     if (columnName === "sum" && !sumSortAsc) {
       setJobs((prev) => {
-        return [...prev.sort(sortDescSum)];
+        return [...prev.sort((a, b) => sortSum(a, b, false))];
       });
 
       setSumSortAsc((prev) => !prev);

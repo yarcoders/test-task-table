@@ -1,7 +1,4 @@
-export const reduceJobs = function reduceJobsArrSameId(
-  allJobsArr,
-  allCategories
-) {
+export const reduceJobs = (allJobsArr, allCategories) => {
   const reducedJobs = allJobsArr.reduce((acc, jobObj, i) => {
     const repeatedObj = acc.find((el) => el.job.id === jobObj.job.id);
 
@@ -29,7 +26,7 @@ export const reduceJobs = function reduceJobsArrSameId(
   return reducedJobs;
 };
 
-export const calcTotalSum = function totalSumForJobsArr(allJobsArr) {
+export const calcTotalSum = (allJobsArr) => {
   const totalSum = allJobsArr.reduce((acc, jobObj, index) => {
     const {
       value,
@@ -43,31 +40,24 @@ export const calcTotalSum = function totalSumForJobsArr(allJobsArr) {
   return totalSum;
 };
 
-export const moneyFormat = function applyMoneyFormatToNumber(amount) {
+export const moneyFormat = (amount) => {
   return new Intl.NumberFormat("es-ES", {
     style: "currency",
     currency: "EUR",
   }).format(amount);
 };
 
-export const getCategoryName = function getCategoryNameById(
-  allCategories,
-  categoryId
-) {
+export const getCategoryName = (allCategories, categoryId) => {
   const categoryObj = allCategories.find((catObj) => catObj.id === categoryId);
 
   return categoryObj.name_en;
 };
 
-export const filterJobs = function filterJobsById(allJobs, jobId) {
+export const filterJobs = (allJobs, jobId) => {
   return allJobs.filter((job) => job.id === jobId);
 };
 
-export const genValues = function generateValuesToRenderInRow(
-  jobObj,
-  allCategories,
-  styles
-) {
+export const genValues = (jobObj, allCategories, styles) => {
   if (jobObj) {
     const {
       coef,
@@ -85,7 +75,6 @@ export const genValues = function generateValuesToRenderInRow(
     const sumMoneyFormat = moneyFormat(price * value * coef);
 
     return [
-      //    { value: 1, style: styles.cellIndex },
       { value: name, style: styles.cellName },
       { value: currCategoryName, style: styles.cell },
       { value: dec_id, style: styles.cell },
@@ -108,34 +97,15 @@ export const genValues = function generateValuesToRenderInRow(
   ];
 };
 
-export const sortAscDecision = (jobObj1, jobObj2) => {
-  if (jobObj1.dec_id > jobObj2.dec_id) return -1;
-  if (jobObj1.dec_id < jobObj2.dec_id) return 1;
+export const sortStr = (prop1, prop2, asc) => {
+  if (prop1 > prop2 && asc) return -1;
+  if (prop1 < prop2 && asc) return 1;
+  if (prop1 > prop2 && !asc) return 1;
+  if (prop1 < prop2 && !asc) return -1;
   return 0;
 };
 
-export const sortDescDecision = (jobObj1, jobObj2) => {
-  if (jobObj1.dec_id > jobObj2.dec_id) return 1;
-  if (jobObj1.dec_id < jobObj2.dec_id) return -1;
-  return 0;
-};
-
-export const sortAscCategory = (jobObj1, jobObj2) => {
-  if (jobObj1.categoryName > jobObj2.categoryName) return -1;
-  if (jobObj1.categoryName < jobObj2.categoryName) return 1;
-  return 0;
-};
-
-export const sortDescCategory = (jobObj1, jobObj2) => {
-  if (jobObj1.categoryName > jobObj2.categoryName) return 1;
-  if (jobObj1.categoryName < jobObj2.categoryName) return -1;
-  return 0;
-};
-
-export const sortAscSum = (jobObj1, jobObj2) => {
-  return jobObj2.totalSum - jobObj1.totalSum;
-};
-
-export const sortDescSum = (jobObj1, jobObj2) => {
-  return jobObj1.totalSum - jobObj2.totalSum;
+export const sortSum = (jobObj1, jobObj2, asc) => {
+  if (asc) return jobObj2.totalSum - jobObj1.totalSum;
+  if (!asc) return jobObj1.totalSum - jobObj2.totalSum;
 };
